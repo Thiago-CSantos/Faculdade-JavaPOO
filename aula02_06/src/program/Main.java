@@ -7,7 +7,6 @@ import entitites.Endereco;
 
 public class Main {
 
-	@SuppressWarnings({ "unused", "unused" })
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
@@ -17,7 +16,9 @@ public class Main {
 
 		Cliente[] clientes = new Cliente[vetC];
 		Endereco[] enderecos = new Endereco[vetE];
-		int op, op2, i, a = 0;
+		int op, op2, i, a = 1;
+		String nome = null, cpf = null, complemento = null, CEP;
+		Integer numero = null;
 
 		do {
 
@@ -44,67 +45,70 @@ public class Main {
 					op2 = sc.nextInt();
 
 					switch (op2) {
-					case 1:
-						System.out.println("\n\n==[Cadastrar Cliente]==");
-						System.out.println("Digite o nome: ");
-						String nome = sc.nextLine();
-						sc.nextLine();
-						System.out.println("Digite o CPF: ");
-						String cpf = sc.next();
-						System.out.println("Digite o Complemento: ");
-						String complemento = sc.nextLine();
-						sc.nextLine();
-						System.out.println("Digite o numero: ");
-						Integer numero = sc.nextInt();
-						
-						System.out.println("CEP:");
-						String CEP = sc.next();
-						
-						i=0;
-						while(i<vetC && clientes[i]!=null) {
+					case 1: {
+
+						if (a > 0) {
+							System.out.println("\n\n==[Cadastrar Cliente]==");
+							System.out.println("Digite o nome: ");
+							nome = sc.nextLine();
+							sc.nextLine();
+							System.out.println("Digite o CPF: ");
+							cpf = sc.next();
+							System.out.println("Digite o Complemento: ");
+							complemento = sc.nextLine();
+							sc.nextLine();
+							System.out.println("Digite o numero: ");
+							numero = sc.nextInt();
+
+							System.out.println("CEP:");
+							CEP = sc.next();
+						}
+
+						i = 0;
+						while (i < vetC && clientes[i] != null) {
 							i++;
 						}
-						
-						a=0;
-						while(a<vetE && enderecos[a].getCEP() != CEP) {
-							a++;
-						}
-						
-						if(CEP.equals(enderecos[a].getCEP()) ) {
-							System.out.println("Rua: ");
-							String rua = sc.next();
-							System.out.println("CEP: ");
-							String cep = sc.next();
-							System.out.println("Cidade: ");
-							String cidade = sc.next();
-							enderecos[i] = new Endereco(rua, cep, cidade);
-						}else {
-							System.out.println("Endereco ja cadastrado!");
-						}
-						
-						if(i<vetC) {
+
+						if (i < vetC) {
 							clientes[i] = new Cliente(cpf, nome, enderecos[i], complemento, numero);
-						}else {
+						} else {
 							break;
 						}
+						break;
+					}
+
 					case 4:
 						System.out.println("\n\n==[Consultar Cliente]==");
-                        System.out.println("Digite o CEP da pessoa que deseja consultar: ");
-                        String cep = sc.next();
-                        
-                        i=0;
-                        while(i<vetC && cep.equals(enderecos[i].getCEP())) {
-                        	i++;
-                        }
-                        
-                        if(i<vetC) {
-                        	clientes[i].toString();
-                        }
-                        
+						System.out.println("Digite o CEP da pessoa que deseja consultar: ");
+						String cep = sc.next();
+
+						i = 0;
+						while (i < vetC && cep.equals(enderecos[i].getCEP())) {
+							i++;
+						}
+
+						if (i < vetC) {
+							clientes[i].toString();
+						}
+
 					}
 
 				} while (op2 != 6);
 
+			case 2:
+				a = 2;
+
+//				if(CEP.equals(enderecos[a].getCEP()) ) {
+//					System.out.println("Rua: ");
+//					String rua = sc.next();
+//					System.out.println("CEP: ");
+//					String cep = sc.next();
+//					System.out.println("Cidade: ");
+//					String cidade = sc.next();
+//					enderecos[i] = new Endereco(rua, cep, cidade);
+//				}else {
+//					System.out.println("Endereco ja cadastrado!");
+//				}
 			}
 
 		} while (op != 3);

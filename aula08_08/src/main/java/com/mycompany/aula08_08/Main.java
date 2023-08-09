@@ -1,17 +1,33 @@
 
 package com.mycompany.aula08_08;
 
-import com.mycompany.aula08_08.entitie.Cachorro;
+import java.util.ArrayList;
 
 
 public class Main {
     
     public static void main(String[] args) {
         
-        Cachorro toto = new Cachorro("Totó", 90.0);
+        ArrayList<String> listaPessoa = new ArrayList<>();
         
-        toto.fazerBarulho();
-        toto.enterrarOsso();
+        listaPessoa.add("Rogério");
+        
+        listaPessoa.add("Paulo");
+        listaPessoa.add("João");
+        
+        
+        for(int i = 0; i< listaPessoa.size(); i++){
+            String aux = listaPessoa.get(i);
+            System.out.println(aux);
+        }
+        
+        // Pega o indice/posição do elemento
+        int posicao =listaPessoa.indexOf("João");
+        // Altera o elemento pela posição
+        listaPessoa.set(posicao, "Tião Carreiro");
+        // Remove o elemento da lista
+        listaPessoa.remove("Paulo");
+        listaPessoa.remove(1);
         
     }
 }

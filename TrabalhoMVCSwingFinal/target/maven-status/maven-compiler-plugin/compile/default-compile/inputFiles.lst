@@ -1,0 +1,24 @@
+<<<<<<< HEAD
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\view\LoginUsuario.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\model\ListaUsuario.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\view\AlterarSenhaView.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\view\OpcaoView.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\view\CadastroUsuario.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\TrabalhoMVCSwing.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\view\SimularJurosView.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\model\Juros.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\controller\UsuarioController.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\model\JurosComposto.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\model\Usuario.java
+C:\Users\thiag\Desktop\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\view\HomeView.java
+=======
+C:\Users\thiag\Documents\NetBeansProjects\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\controller\OperacaoBD.java
+C:\Users\thiag\Documents\NetBeansProjects\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\model\Usuario.java
+C:\Users\thiag\Documents\NetBeansProjects\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\view\CadastroUsuario.java
+C:\Users\thiag\Documents\NetBeansProjects\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\view\HomeView.java
+C:\Users\thiag\Documents\NetBeansProjects\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\view\LoginUsuario.java
+C:\Users\thiag\Documents\NetBeansProjects\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\model\ConexaoBD.java
+C:\Users\thiag\Documents\NetBeansProjects\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\TrabalhoMVCSwing.java
+C:\Users\thiag\Documents\NetBeansProjects\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\controller\SimularJuros.java
+C:\Users\thiag\Documents\NetBeansProjects\TrabalhoMVCSwing\src\main\java\com\mycompany\trabalhomvcswing\view\SimularJurosView.java
+>>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff

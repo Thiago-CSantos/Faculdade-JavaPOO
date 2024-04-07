@@ -73,7 +73,7 @@ public class Aluno {
 
     @Override
     public String toString() {
-       return nome + "-"+ ra +"\n";// Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+       return nome + ","+ ra +"\n"; // Aqui é o que será salvo no arguivo
     }
     
     

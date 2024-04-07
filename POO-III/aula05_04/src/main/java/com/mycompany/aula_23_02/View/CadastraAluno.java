@@ -152,8 +152,7 @@ public class CadastraAluno extends javax.swing.JFrame {
             jTxtNome.requestFocus();
             return false;
         }
-        String raAux = ra.trim();//retira todos os espaços em
-                                 //branco
+        String raAux = ra.trim();//retira todos os espaços em branco
         
         if(ra.isEmpty()|| raAux.equals("-")){
             JOptionPane.showMessageDialog(rootPane,
@@ -166,9 +165,9 @@ public class CadastraAluno extends javax.swing.JFrame {
     } 
     
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        // TODO add your handling code here:
         String nome = jTxtNome.getText();
         String ra= jTxtRA.getText();
+        System.out.println(nome);
         
         if(!verificaDados(nome,ra)) return;
         try{ 
@@ -188,9 +187,6 @@ public class CadastraAluno extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

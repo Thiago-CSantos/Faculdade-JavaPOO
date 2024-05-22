@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -61,5 +63,38 @@ public class DAOConta {
                 }
             }
         }
+    }
+    
+    public void insertConta(Conta conta) throws SQLException, ClassNotFoundException{
+        Connection con = null;
+        // Load the JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Establish the connection
+            con = DriverManager.getConnection(DB_URL, USER, PASS);
+            
+            String sql = 
+            "insert into Conta(numConta, numAg,saldo) Values(?,?,?)";
+            PreparedStatement comando = con.prepareStatement(sql);
+            comando.setString(1, conta.getNumAg());
+            comando.setString(2, conta.getNumAg());
+            comando.setDouble(3, conta.getSaldo());
+            
+            comando.executeUpdate();
+            con.close();
+    }
+    
+    public void selectConta() throws SQLException, ClassNotFoundException{
+        Connection con = null;
+        // Load the JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Establish the connection
+            con = DriverManager.getConnection(DB_URL, USER, PASS);
+            
+            String sql = "select * from Conta";
+            PreparedStatement comando = con.prepareStatement(sql);
+            ResultSet result =  comando.executeQuery();
+            System.out.println(result);
+            
+            
     }
 }

@@ -20,10 +20,8 @@ public class ProjetoJDBC {
 //            Logger.getLogger(ProjetoJDBC.class.getName()).log(Level.SEVERE, null, ex);
 //        }
         try {
-            dao.selectConta();
+            System.out.println(dao.selectConta());
         } catch (SQLException ex) {
-            Logger.getLogger(ProjetoJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ProjetoJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

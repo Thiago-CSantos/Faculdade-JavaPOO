@@ -6,15 +6,35 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DAOConta {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/POO3";
     private static final String USER = "root";
     private static final String PASS = "1234";
+    private Connection con = null;
+    public List<Conta> selectConta() throws SQLException{
+        con = DriverManager.getConnection(DB_URL, USER, PASS);
+        
+        String sql = "select * from Conta;";
+        
+        PreparedStatement comando = con.prepareStatement(sql);
+        ResultSet result = comando.executeQuery();
+        
+        List<Conta> contas = new ArrayList<>();
+        
+        while(result.next()){
+//            Conta conta = new Conta(result.getString(2), result.getString(3), result.getDouble(4));
+            contas.add(new Conta(result.getString(2), result.getString(3), result.getDouble(4)));
+        }
+        
+        return contas;
+    }
 
     public void criaTabelaConta() {
-        Connection con = null;
+        
         Statement stmt = null;
         try {
             // Load the JDBC driver
@@ -82,19 +102,5 @@ public class DAOConta {
             comando.executeUpdate();
             con.close();
     }
-    
-    public void selectConta() throws SQLException, ClassNotFoundException{
-        Connection con = null;
-        // Load the JDBC driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            // Establish the connection
-            con = DriverManager.getConnection(DB_URL, USER, PASS);
-            
-            String sql = "select * from Conta";
-            PreparedStatement comando = con.prepareStatement(sql);
-            ResultSet result =  comando.executeQuery();
-            System.out.println(result);
-            
-            
-    }
+   
 }

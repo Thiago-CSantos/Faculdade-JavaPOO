@@ -20,7 +20,7 @@ public class AlunoController {
         }
     }
 
-    public void carregaAlunos() throws FileNotFoundException {
+    public void carregaAlunos() throws FileNotFoundException, IOException {
         dao.carregaAlunos();
     }
 
@@ -55,9 +55,9 @@ public class AlunoController {
     public void buscarAluno(JTable jTableAlunos, String nome) {
         DefaultTableModel modelo = (DefaultTableModel) jTableAlunos.getModel();
         boolean encontrou = false;
-        List<Aluno> lista = new ArrayList();
-        lista = dao.listaAlunos();
-        System.out.println("Lista: " + lista);
+        List<Aluno> lista = dao.listaAlunos();
+        Object[] objetos = new Object[2]; // quantidade de colunas
+         
         for (int i = 0; i < lista.size(); i++) {
 
             Aluno dados = lista.get(i);
@@ -68,8 +68,9 @@ public class AlunoController {
                 encontrou = true;
                 System.out.println("Aqui");
                 modelo.setRowCount(0);
-                Aluno rowDados[] = new Aluno[1];
-                rowDados[0] = new Aluno(dados.getNome(), dados.getRa());
+                String rowDados[] = new String[2];
+                rowDados[0] = dados.getNome();
+                rowDados[1] = dados.getRa();
                 modelo.addRow(rowDados);
                 return;
             }

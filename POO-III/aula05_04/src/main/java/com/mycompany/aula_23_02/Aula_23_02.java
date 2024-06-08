@@ -4,13 +4,14 @@
 
 package com.mycompany.aula_23_02;
 
-/**
- *
- * @author Android
- */
+import com.mycompany.aula_23_02.View.GerenciaAlunos;
+import java.io.IOException;
+
 public class Aula_23_02 {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    public static void main(String[] args) throws IOException {
+        
+        GerenciaAlunos painel = new GerenciaAlunos();
+        painel.setVisible(true);
     }
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.aula_23_02.Model;
 
 import java.io.BufferedReader;
@@ -15,36 +11,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- *
- * @author Android
- */
 public class DAOAluno {
 
     private List<Aluno> alunos = new ArrayList<Aluno>();
 
-    public void carregaAlunos() throws FileNotFoundException {
-        FileReader arquivo = new FileReader("alunos.txt");
-        Scanner leitor = new Scanner(arquivo);
+    public void carregaAlunos() throws FileNotFoundException, IOException {
+        alunos.clear();
+        System.out.println(alunos);
+        BufferedReader arquivo = new BufferedReader(new FileReader("alunos.txt"));
+//        Scanner leitor = new Scanner(arquivo);
+        String line;
+    // Enquanto houver linhas no arquivo
+    while ((line = arquivo.readLine()) != null) {
+        // Leia os dados do aluno
+        String dados = line;
+        // Separar nome do RA, utilizando a vírgula como separador
+        String[] info = dados.split(",");
 
-        // enquanto houver linhas no arquivo
-        while (leitor.hasNext()) {
-            // leia os dados do aluno
-            String dados = leitor.nextLine();
-            // separar nome do ra, utilizando o - como separador
-            String[] info = dados.split(",");
+        // Pegar os dados do aluno
+        String nome = info[0];
+        String ra = info[1];
 
-            // fazer como Jake.. pegar os dados do aluno
-            String nome = info[0];
-            String ra = info[1];
-
-            // montar o "Frankie" ..aluno
-            Aluno aluno = new Aluno(nome, ra);
-
-            // cadastrar no Array
-            alunos.add(aluno);
-
-        }
+        // Montar o aluno
+        Aluno aluno = new Aluno(nome, ra);
+        // Cadastrar na lista de alunos
+        alunos.add(aluno);
+    }
+        arquivo.close();
+        System.out.println(alunos);
     }
 
     public boolean cadastra(Aluno novo) throws IOException {
@@ -83,7 +77,7 @@ public class DAOAluno {
             String linha;
 
             while ((linha = leitor.readLine()) != null) {
-                System.out.println("Teste"+ linha);
+                System.out.println("Teste" + linha);
                 if (!linha.contains("," + raRemover)) {
                     linhas.add(linha);
                 }

@@ -2,6 +2,7 @@ package com.mycompany.aula_23_02.View;
 
 import com.mycompany.aula_23_02.Controller.AlunoController;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -17,7 +18,7 @@ public class GerenciaAlunos extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public GerenciaAlunos() {
+    public GerenciaAlunos() throws IOException {
         initComponents();
         if (controller == null) {
             controller = new AlunoController();
@@ -43,7 +44,10 @@ public class GerenciaAlunos extends javax.swing.JFrame {
         jMenuRemover = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciar Alunos");
+        setBackground(new java.awt.Color(102, 102, 102));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMenu1.setText("Programa");
 
@@ -94,11 +98,11 @@ public class GerenciaAlunos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 676, Short.MAX_VALUE)
+            .addGap(0, 456, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 383, Short.MAX_VALUE)
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
@@ -114,7 +118,6 @@ public class GerenciaAlunos extends javax.swing.JFrame {
     private void jMenuListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarActionPerformed
         ListagemDeAlunos lista = new ListagemDeAlunos();
         lista.setVisible(true);
-        this.setVisible(false);
 
     }//GEN-LAST:event_jMenuListarActionPerformed
 
@@ -161,7 +164,11 @@ public class GerenciaAlunos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GerenciaAlunos().setVisible(true);
+                try {
+                    new GerenciaAlunos().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(GerenciaAlunos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -3,21 +3,23 @@ package com.mycompany.aula_23_02.View;
 import com.mycompany.aula_23_02.Controller.AlunoController;
 import com.mycompany.aula_23_02.Model.Aluno;
 import com.mycompany.aula_23_02.Model.DAOAluno;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Android
  */
 public class ListagemDeAlunos extends javax.swing.JFrame {
-    
+
     private AlunoController controller = new AlunoController();
 
-    /**
-     * Creates new form ListagemDeAlunos
-     */
     public ListagemDeAlunos() {
         initComponents();
+        btnVoltar.setVisible(false);
         if (jTableAlunos.getModel().getRowCount() == 0) {
             controller.gerarTableModel(jTableAlunos);
         }
@@ -35,7 +37,8 @@ public class ListagemDeAlunos extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("LIsta de Alunos");
 
         jTableAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,6 +73,7 @@ public class ListagemDeAlunos extends javax.swing.JFrame {
         });
 
         btnVoltar.setText("Voltar");
+        btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);
@@ -145,11 +149,16 @@ public class ListagemDeAlunos extends javax.swing.JFrame {
         String nomeBuscar = txtBuscaNome.getText();
         controller.buscarAluno(jTableAlunos, nomeBuscar);
     }//GEN-LAST:event_btnBuscarNomeActionPerformed
-
+// TODO:
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        GerenciaAlunos gerenciaAlunos = new GerenciaAlunos();
+        GerenciaAlunos gerenciaAlunos = null;
+        try {
+            gerenciaAlunos = new GerenciaAlunos();
+        } catch (IOException ex) {
+            Logger.getLogger(ListagemDeAlunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         gerenciaAlunos.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -158,13 +167,21 @@ public class ListagemDeAlunos extends javax.swing.JFrame {
             int coluna = jTableAlunos.getSelectedColumn();
             Object nomeAntigo = jTableAlunos.getValueAt(linha, coluna);
             String novoNome = JOptionPane.showInputDialog("Digite nome novo!");
-            System.out.println(nomeAntigo);
+            if (novoNome == null) {
+                throw new RuntimeException("Nome é: " + novoNome);
+            }
+            System.out.println(novoNome);
             controller.EditarNome(novoNome, nomeAntigo.toString());
+            // Zera o conteúdo da tabela
+            DefaultTableModel model = (DefaultTableModel) jTableAlunos.getModel();
+            model.setRowCount(0);
+            controller.carregaAlunos();
+            controller.gerarTableModel(jTableAlunos);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Erro: selecione o nome que deseja alterar na lista! \nErro:" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

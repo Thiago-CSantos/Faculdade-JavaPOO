@@ -2,7 +2,6 @@ package com.trabalho.trabalhogerenciaatendimento.MODEL;
 
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,13 +11,20 @@ public class Paciente {
     private String nome;
     private String rg;
     private Sexo sexo;
-    private Date dataNascimento;
+    private String dataNascimento;
     private List<Senha> senhaAtendimento;
 
     public Paciente() {
     }
 
-    public Paciente(int idPacientePaciente, String nome, String rg, Sexo sexo, Date dataNascimento) {
+    public Paciente(String nome, String rg, Sexo sexo, String dataNascimento) {
+        this.nome = nome;
+        this.rg = rg;
+        this.sexo = sexo;
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Paciente(int idPacientePaciente, String nome, String rg, Sexo sexo, String dataNascimento) {
         this.idPacientePaciente = idPacientePaciente;
         this.nome = nome;
         this.rg = rg;
@@ -58,11 +64,11 @@ public class Paciente {
         this.sexo = sexo;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -72,41 +78,14 @@ public class Paciente {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + this.idPacientePaciente;
-        hash = 67 * hash + Objects.hashCode(this.nome);
-        hash = 67 * hash + Objects.hashCode(this.rg);
-        hash = 67 * hash + Objects.hashCode(this.sexo);
-        hash = 67 * hash + Objects.hashCode(this.dataNascimento);
-        return hash;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Paciente paciente)) return false;
+        return getIdPacientePaciente() == paciente.getIdPacientePaciente() && Objects.equals(getNome(), paciente.getNome()) && Objects.equals(getRg(), paciente.getRg()) && getSexo() == paciente.getSexo() && Objects.equals(getDataNascimento(), paciente.getDataNascimento()) && Objects.equals(senhaAtendimento, paciente.senhaAtendimento);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Paciente other = (Paciente) obj;
-        if (this.idPacientePaciente != other.idPacientePaciente) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.rg, other.rg)) {
-            return false;
-        }
-        if (!Objects.equals(this.sexo, other.sexo)) {
-            return false;
-        }
-        return Objects.equals(this.dataNascimento, other.dataNascimento);
+    public int hashCode() {
+        return Objects.hash(getIdPacientePaciente(), getNome(), getRg(), getSexo(), getDataNascimento(), senhaAtendimento);
     }
-
 }

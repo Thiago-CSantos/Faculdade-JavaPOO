@@ -93,7 +93,6 @@ public class GerenciaAtendimentos extends javax.swing.JFrame {
     gerar.setVisible(rootPaneCheckingEnabled);
     this.dispose();
         
-        
     }//GEN-LAST:event_btnGerarSenhaActionPerformed
 
     /**

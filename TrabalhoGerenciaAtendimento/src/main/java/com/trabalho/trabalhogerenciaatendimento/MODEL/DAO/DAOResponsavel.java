@@ -97,7 +97,7 @@ public class DAOResponsavel {
     public Responsavel getRespoPaciente(String rgPaciente) {
         try {
             conectar();
-            String sql = "select r.nome, r.cpf from Responsavel r inner join Paciente p on p.idPacientePaciente = r.es_idDependente where p.rg = " + rgPaciente;
+            String sql = "select r.nome, r.cpf from Responsavel r left join Paciente p on p.idPacientePaciente = r.es_idDependente where p.rg = " + rgPaciente + " OR p.rg IS NULL";
 
             PreparedStatement com = conexao.prepareStatement(sql);
 
@@ -114,23 +114,23 @@ public class DAOResponsavel {
         }
     }
 
-//    public Responsavel getResponsavel(int idPaciente){;
-//        try {
-//             conectar();
-//            String sql = "SELECT nome, cpf FROM Responsavel where es_idDependente = " + idPaciente;
-//
-//            PreparedStatement com = conexao.prepareStatement(sql);
-//
-//            ResultSet result = com.executeQuery();
-//            Responsavel responsavel = null;
-//            while (result.next()) {
-//                responsavel = new Responsavel(result.getString(1),result.getString(2));
-//            }
-//            System.out.println("Responsavel: " + responsavel);
-//            return responsavel;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
+    public Responsavel getResponsavel(int idPaciente){;
+        try {
+             conectar();
+            String sql = "SELECT nome, cpf FROM Responsavel where es_idDependente = " + idPaciente;
+
+            PreparedStatement com = conexao.prepareStatement(sql);
+
+            ResultSet result = com.executeQuery();
+            Responsavel responsavel = null;
+            while (result.next()) {
+                responsavel = new Responsavel(result.getString(1),result.getString(2));
+            }
+            System.out.println("Responsavel: " + responsavel);
+            return responsavel;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

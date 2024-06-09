@@ -44,8 +44,19 @@ public class PacienteController {
             objetos[3] = paciente.getDataNascimento();
             // campos do Responsavel
             Responsavel r = daoResponsavel.getRespoPaciente(paciente.getRg());
-            objetos[4] = r.getNome();
-            objetos[5] = r.getCpf();
+
+            if (r != null) {
+                objetos[4] = r.getNome() != null ? r.getNome() : "";
+                objetos[5] = r.getCpf() != null ? r.getCpf() : "";
+            } else {
+                objetos[4] = "";
+                objetos[5] = "";
+            }
+//            Paciente p = daoResponsavel.getPacienteId(paciente.getRg());
+//            Responsavel r = daoResponsavel.getResponsavel(p.getIdPacientePaciente());
+//            objetos[4] = r.getNome();
+//            objetos[5] = r.getCpf();
+
             modelo.addRow(objetos);
         }
 

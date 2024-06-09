@@ -56,22 +56,27 @@ public class DAOPaciente {
         try {
             conectar();
             String sql = "INSERT INTO Paciente (nome, rg, sexo, dataNascimento) VALUES (?, ?, ?, ?)";
-            PreparedStatement stmt = conexao.prepareStatement(sql);
+            PreparedStatement com = conexao.prepareStatement(sql);
 
-            stmt.setString(1, paciente.getNome());
-            stmt.setString(2, paciente.getRg());
-            stmt.setString(3, paciente.getSexo().toString());
-            stmt.setDate(4, Date.valueOf(paciente.getDataNascimento()));
+            com.setString(1, paciente.getNome());
+            com.setString(2, paciente.getRg());
+            com.setString(3, paciente.getSexo().toString());
+            com.setDate(4, Date.valueOf(paciente.getDataNascimento()));
 
-            stmt.executeUpdate();
-
-            stmt.close();
+            com.executeUpdate();
+//            com.close();
             desconectar();
 
+            conexao.commit();
             System.out.println("Paciente cadastrado com sucesso!");
 
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                conexao.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             System.out.println("Erro ao cadastrar paciente: " + e.getMessage());
         }
     }

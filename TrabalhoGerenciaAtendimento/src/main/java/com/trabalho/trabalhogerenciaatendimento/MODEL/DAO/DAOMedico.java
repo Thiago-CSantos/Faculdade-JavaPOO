@@ -1,18 +1,11 @@
 package com.trabalho.trabalhogerenciaatendimento.MODEL.DAO;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Medico;
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Medico;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DAOMedico {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
@@ -75,12 +68,18 @@ public class DAOMedico {
             com.setString(6, medico.getFoto());
             com.setString(7, medico.getEspecialidade().toString());
 
-            com.executeUpdate();    
+            com.executeUpdate();
             desconectar();
 
+            conexao.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                conexao.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             System.out.println("Erro ao cadastrar paciente: " + e.getMessage());
         }
     }

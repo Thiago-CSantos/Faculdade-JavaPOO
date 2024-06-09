@@ -5,6 +5,8 @@
 package com.trabalho.trabalhogerenciaatendimento.VIEW;
 
 import com.trabalho.trabalhogerenciaatendimento.Controller.MedicoController;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Medico;
 import java.io.File;
 
 public class CadastrarMedico extends javax.swing.JFrame {
@@ -166,10 +168,11 @@ public class CadastrarMedico extends javax.swing.JFrame {
         String cpf = txtCpf.getText();
         String dataNascimento = txtDataNascimento.getText();
         String crm = txtCrm.getText();
-        String especialidade = txtEspecialidade.getText();
+        Especialidade especialidade = Especialidade.valueOf(txtEspecialidade.getText());
         String filePath = fileChooser.getSelectedFile().getAbsolutePath();
         
-        
+        Medico medico = new Medico(crm, nome, rg, cpf, dataNascimento, filePath, especialidade);
+        controller.cadastrarMedico(medico);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**

@@ -61,7 +61,7 @@ public class DAOMedico {
         return null;
     }
 
-    public void cadastrarPaciente(Medico medico) {
+    public void cadastrarMedico(Medico medico) {
         try {
             conectar();
             String sql = "INSERT INTO Medico (CRM, nome, rg, cpf, dataNascimento, foto, especialidade) VALUES (?, ?, ?, ?, ?, ?, ?)";

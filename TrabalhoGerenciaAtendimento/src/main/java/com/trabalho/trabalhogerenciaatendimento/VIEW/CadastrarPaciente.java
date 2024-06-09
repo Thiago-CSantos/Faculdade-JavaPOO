@@ -4,8 +4,8 @@
  */
 package com.trabalho.trabalhogerenciaatendimento.VIEW;
 
+import com.trabalho.trabalhogerenciaatendimento.Controller.PacienteController;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
-import com.trabalho.trabalhogerenciaatendimento.MODEL.DAO.DAOPaciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
 
 /**
@@ -14,14 +14,14 @@ import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
  */
 public class CadastrarPaciente extends javax.swing.JFrame {
 
-    private static DAOPaciente controller = null;
+    private static PacienteController controller = null;
 
     /**
      * Creates new form CadastrarPaciente
      */
     public CadastrarPaciente() {
         initComponents();
-        controller = new DAOPaciente();
+        controller = new PacienteController();
 
     }
 
@@ -160,7 +160,7 @@ public class CadastrarPaciente extends javax.swing.JFrame {
         System.out.println("Sexo: " + sexo);
 
         Paciente paciente = new Paciente(nome, rg, sexo, dataNascimento);
-        
+        controller.cadastrarPaciente(paciente);
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

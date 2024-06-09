@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DAOPaciente {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAlunos";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
     private static final String PASS = "123456";
     private Connection conexao = null;
@@ -18,11 +18,11 @@ public class DAOPaciente {
     public DAOPaciente() {
     }
 
-    public void conectar() throws SQLException {
+    protected void conectar() throws SQLException {
         conexao = conexao = DriverManager.getConnection(DB_URL, USER, PASS);
     }
 
-    public void desconectar() throws SQLException {
+    protected void desconectar() throws SQLException {
         conexao.close();
     }
 
@@ -51,5 +51,7 @@ public class DAOPaciente {
         }
         return null;
     }
+
+
 
 }

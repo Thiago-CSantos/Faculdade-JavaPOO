@@ -4,6 +4,8 @@
  */
 package com.trabalho.trabalhogerenciaatendimento.VIEW;
 
+import com.trabalho.trabalhogerenciaatendimento.MODEL.DAO.DAOPaciente;
+
 /**
  *
  * @author rafap
@@ -13,8 +15,12 @@ public class GerarSenha extends javax.swing.JFrame {
     /**
      * Creates new form GerarSenha
      */
+
+    private DAOPaciente daoPaciente = new DAOPaciente();
+
     public GerarSenha() {
         initComponents();
+        daoPaciente.listarPaciente();
     }
 
     /**

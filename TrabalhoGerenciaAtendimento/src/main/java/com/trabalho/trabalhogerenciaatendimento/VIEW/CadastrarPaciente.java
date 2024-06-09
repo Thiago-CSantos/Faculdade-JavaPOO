@@ -4,17 +4,25 @@
  */
 package com.trabalho.trabalhogerenciaatendimento.VIEW;
 
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.DAO.DAOPaciente;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
+
 /**
  *
  * @author rafap
  */
 public class CadastrarPaciente extends javax.swing.JFrame {
 
+    private static DAOPaciente controller = null;
+
     /**
      * Creates new form CadastrarPaciente
      */
     public CadastrarPaciente() {
         initComponents();
+        controller = new DAOPaciente();
+
     }
 
     /**
@@ -28,11 +36,11 @@ public class CadastrarPaciente extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtRG = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtDataNascimento = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cbSexo = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
@@ -43,9 +51,9 @@ public class CadastrarPaciente extends javax.swing.JFrame {
 
         jLabel2.setText("Nome:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtNomeActionPerformed(evt);
             }
         });
 
@@ -63,6 +71,11 @@ public class CadastrarPaciente extends javax.swing.JFrame {
         });
 
         jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,12 +102,12 @@ public class CadastrarPaciente extends javax.swing.JFrame {
                                             .addComponent(jLabel3))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField1)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)))
+                                            .addComponent(txtNome)
+                                            .addComponent(txtRG, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))))))
+                                        .addComponent(txtDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))))))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -105,15 +118,15 @@ public class CadastrarPaciente extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -126,13 +139,31 @@ public class CadastrarPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtNomeActionPerformed
 
     private void cbSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSexoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbSexoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String nome = txtNome.getText();
+        String rg = txtRG.getText();
+        String dataNascimento = txtDataNascimento.getText();
+        Sexo   sexo = cbSexo.getSelectedIndex() == 0 ? Sexo.Feminino : Sexo.Masculino;
+
+        System.out.println("Nome: " + nome);
+        System.out.println("RG: " + rg);
+        System.out.println("Data de Nascimento: " + dataNascimento);
+        System.out.println("Sexo: " + sexo);
+
+        Paciente paciente = new Paciente(nome, rg, sexo, dataNascimento);
+        
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,8 +208,8 @@ public class CadastrarPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txtDataNascimento;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtRG;
     // End of variables declaration//GEN-END:variables
 }

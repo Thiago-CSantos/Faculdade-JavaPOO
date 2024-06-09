@@ -7,14 +7,20 @@ import java.util.Objects;
 
 public class Senha {
     private int idSenha;
-    private Date dataGeracao;
+    private String dataGeracao;
     private Especialidade especialidade;
     private int idPaciente;
 
     public Senha() {
     }
 
-    public Senha(int idSenha, Date dataGeracao, Especialidade especialidade, int idPaciente) {
+    public Senha(String dataGeracao, Especialidade especialidade, int idPaciente) {
+        this.dataGeracao = dataGeracao;
+        this.especialidade = especialidade;
+        this.idPaciente = idPaciente;
+    }
+
+    public Senha(int idSenha, String dataGeracao, Especialidade especialidade, int idPaciente) {
         this.idSenha = idSenha;
         this.dataGeracao = dataGeracao;
         this.especialidade = especialidade;
@@ -29,11 +35,11 @@ public class Senha {
         this.idSenha = idSenha;
     }
 
-    public Date getDataGeracao() {
+    public String getDataGeracao() {
         return dataGeracao;
     }
 
-    public void setDataGeracao(Date dataGeracao) {
+    public void setDataGeracao(String dataGeracao) {
         this.dataGeracao = dataGeracao;
     }
 

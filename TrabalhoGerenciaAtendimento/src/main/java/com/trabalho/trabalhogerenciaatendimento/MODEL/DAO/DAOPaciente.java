@@ -81,4 +81,25 @@ public class DAOPaciente {
         }
     }
 
+    public int getIdPaciente(String rg) {
+        try {
+            conectar();
+            String sql = "SELECT idPacientePaciente FROM Paciente WHERE rg = ?";
+            PreparedStatement com = conexao.prepareStatement(sql);
+            com.setString(1, rg);
+
+            ResultSet result = com.executeQuery();
+            int id = 0;
+            while (result.next()) {
+                id = result.getInt(1);
+            }
+
+            desconectar();
+            return id;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

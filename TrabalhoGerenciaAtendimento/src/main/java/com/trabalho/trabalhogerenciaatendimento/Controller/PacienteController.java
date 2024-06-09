@@ -30,6 +30,10 @@ public class PacienteController {
         dao.listarPaciente();
     }
 
+    public int getIdPaciente(String rg){
+        return dao.getIdPaciente(rg);
+    }
+
     public void gerarTableModel(JTable tabelaPacientes) {
 
         DefaultTableModel modelo = (DefaultTableModel) tabelaPacientes.getModel();

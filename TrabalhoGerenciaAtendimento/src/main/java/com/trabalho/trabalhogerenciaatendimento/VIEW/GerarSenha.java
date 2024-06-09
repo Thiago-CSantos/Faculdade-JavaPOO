@@ -5,17 +5,36 @@
 package com.trabalho.trabalhogerenciaatendimento.VIEW;
 
 import com.trabalho.trabalhogerenciaatendimento.Controller.PacienteController;
+import com.trabalho.trabalhogerenciaatendimento.Controller.ResponsavelController;
+import com.trabalho.trabalhogerenciaatendimento.Controller.SenhaController;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Responsavel;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Senha;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.swing.table.DefaultTableModel;
 
 public class GerarSenha extends javax.swing.JFrame {
 
     private PacienteController controller = null;
+    private ResponsavelController controllerResponsavel = null;
+    private SenhaController controllerSenha = null;
 
     public GerarSenha() {
         initComponents();
 
         controller = new PacienteController();
         controller.gerarTableModel(tabelaPacientes);
+
+        controllerSenha = new SenhaController();
+
+        controllerResponsavel = new ResponsavelController();
+
+
+
 
     }
 
@@ -30,6 +49,7 @@ public class GerarSenha extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,7 +80,12 @@ public class GerarSenha extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ortopedia", "Pediatria", "Atendimento gera" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ORTOPEDIA", "PEDIATRIA", "ATENDIMENTO_GERAL" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cadastrar paciente");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +95,13 @@ public class GerarSenha extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Paciente");
+
+        btnVoltar.setText("<< Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,7 +116,9 @@ public class GerarSenha extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(380, 380, 380)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(264, 264, 264)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2)))
@@ -108,18 +142,38 @@ public class GerarSenha extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(10, 10, 10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int linha = tabelaPacientes.getSelectedRow();
+        if (linha != -1) {
+            String nome = tabelaPacientes.getValueAt(linha, 0).toString();
+            String rg = tabelaPacientes.getValueAt(linha, 1).toString();
+            String sexo = tabelaPacientes.getValueAt(linha, 2).toString();
+            String data = tabelaPacientes.getValueAt(linha, 3).toString();
+            Especialidade especialidade = Especialidade.valueOf(jComboBox1.getSelectedItem().toString());
 
+            System.out.println("Nome: " + nome + " RG: " + rg + " Sexo: " + sexo + " Data: " + data + " Especialidade: " + especialidade);
+            
+            int es_idDependente = controller.getIdPaciente(rg);
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
+            Senha senha = new Senha(timeStamp, especialidade, es_idDependente);
+
+            controllerSenha.gerarSenha(senha);
+            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -127,6 +181,18 @@ public class GerarSenha extends javax.swing.JFrame {
         panel.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        GerenciaAtendimentos gerencia = new GerenciaAtendimentos();
+
+        gerencia.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -161,6 +227,7 @@ public class GerarSenha extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;

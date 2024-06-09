@@ -22,4 +22,6 @@ public class ResponsavelController {
     public Paciente getPaciente(String rg){
         return dao.getPacienteId(rg);
     }
+
+    
 }

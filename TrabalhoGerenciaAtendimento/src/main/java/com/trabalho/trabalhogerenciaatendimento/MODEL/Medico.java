@@ -11,14 +11,14 @@ public class Medico {
     private String nome;
     private String rg;
     private String cpf;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String foto;
     private Especialidade especialidade;
 
     public Medico() {
     }
 
-    public Medico(int idMedico, String CRM, String nome, String rg, String cpf, Date dataNascimento, String foto, Especialidade especialidade) {
+    public Medico(int idMedico, String CRM, String nome, String rg, String cpf, String dataNascimento, String foto, Especialidade especialidade) {
         this.idMedico = idMedico;
         this.CRM = CRM;
         this.nome = nome;
@@ -69,11 +69,11 @@ public class Medico {
         this.cpf = cpf;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

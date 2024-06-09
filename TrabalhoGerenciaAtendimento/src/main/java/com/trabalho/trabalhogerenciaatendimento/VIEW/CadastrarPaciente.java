@@ -22,7 +22,6 @@ public class CadastrarPaciente extends javax.swing.JFrame {
     public CadastrarPaciente() {
         initComponents();
         controller = new DAOPaciente();
-
     }
 
     /**
@@ -161,7 +160,7 @@ public class CadastrarPaciente extends javax.swing.JFrame {
 
         Paciente paciente = new Paciente(nome, rg, sexo, dataNascimento);
         
-
+        controller.cadastrarPaciente(paciente);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

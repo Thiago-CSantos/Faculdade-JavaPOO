@@ -1,5 +1,7 @@
 package com.trabalho.trabalhogerenciaatendimento.MODEL;
 
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -9,14 +11,14 @@ public class Paciente {
     private int idPacientePaciente;
     private String nome;
     private String rg;
-    private String sexo;
+    private Sexo sexo;
     private Date dataNascimento;
     private List<Senha> senhaAtendimento;
 
     public Paciente() {
     }
 
-    public Paciente(int idPacientePaciente, String nome, String rg, String sexo, Date dataNascimento) {
+    public Paciente(int idPacientePaciente, String nome, String rg, Sexo sexo, Date dataNascimento) {
         this.idPacientePaciente = idPacientePaciente;
         this.nome = nome;
         this.rg = rg;
@@ -48,11 +50,11 @@ public class Paciente {
         this.rg = rg;
     }
 
-    public String getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 

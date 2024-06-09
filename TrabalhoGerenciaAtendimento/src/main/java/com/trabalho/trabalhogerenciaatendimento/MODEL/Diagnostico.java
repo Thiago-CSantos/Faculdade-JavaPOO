@@ -8,18 +8,18 @@ public class Diagnostico {
     private int idDiagnostico;
     private int idSenha;
     private String CRMmedico;
-    private Date data;
+    private Date dataHora;
     private String diagnostico;
     private String tratamento;
 
     public Diagnostico() {
     }
 
-    public Diagnostico(int idDiagnostico, int idSenha, String CRMmedico, Date data, String diagnostico, String tratamento) {
+    public Diagnostico(int idDiagnostico, int idSenha, String CRMmedico, Date dataHora, String diagnostico, String tratamento) {
         this.idDiagnostico = idDiagnostico;
         this.idSenha = idSenha;
         this.CRMmedico = CRMmedico;
-        this.data = data;
+        this.dataHora = dataHora;
         this.diagnostico = diagnostico;
         this.tratamento = tratamento;
     }
@@ -48,12 +48,12 @@ public class Diagnostico {
         this.CRMmedico = CRMmedico;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataHora() {
+        return dataHora;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataHora(Date dataHora) {
+        this.dataHora = dataHora;
     }
 
     public String getDiagnostico() {
@@ -76,11 +76,11 @@ public class Diagnostico {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Diagnostico that)) return false;
-        return getIdDiagnostico() == that.getIdDiagnostico() && getIdSenha() == that.getIdSenha() && Objects.equals(getCRMmedico(), that.getCRMmedico()) && Objects.equals(getData(), that.getData()) && Objects.equals(getDiagnostico(), that.getDiagnostico()) && Objects.equals(getTratamento(), that.getTratamento());
+        return getIdDiagnostico() == that.getIdDiagnostico() && getIdSenha() == that.getIdSenha() && Objects.equals(getCRMmedico(), that.getCRMmedico()) && Objects.equals(getDataHora(), that.getDataHora()) && Objects.equals(getDiagnostico(), that.getDiagnostico()) && Objects.equals(getTratamento(), that.getTratamento());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdDiagnostico(), getIdSenha(), getCRMmedico(), getData(), getDiagnostico(), getTratamento());
+        return Objects.hash(getIdDiagnostico(), getIdSenha(), getCRMmedico(), getDataHora(), getDiagnostico(), getTratamento());
     }
 }

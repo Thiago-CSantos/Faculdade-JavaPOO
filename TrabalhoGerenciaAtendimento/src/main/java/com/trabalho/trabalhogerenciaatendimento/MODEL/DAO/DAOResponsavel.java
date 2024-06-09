@@ -1,21 +1,25 @@
 package com.trabalho.trabalhogerenciaatendimento.MODEL.DAO;
 
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOPaciente {
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Responsavel;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
 
+public class DAOResponsavel {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
     private static final String PASS = "123456";
     private Connection conexao = null;
-    private List<Paciente> pacienteList = new ArrayList<>();
+    private List<Responsavel> responsavelList = new ArrayList<>();
 
-    public DAOPaciente() {
+    public DAOResponsavel() {
     }
 
     protected void conectar() throws SQLException {
@@ -26,25 +30,23 @@ public class DAOPaciente {
         conexao.close();
     }
 
-    public List<Paciente> listarPaciente() {
+    public List<Responsavel> listarPaciente() {
         try {
             conectar();
-            String sql = "SELECT nome, rg, sexo, dataNascimento FROM Paciente";
+            String sql = "SELECT  nome, cpf FROM Responsavel";
             PreparedStatement com = conexao.prepareStatement(sql);
 
             ResultSet result = com.executeQuery();
 
             while (result.next()) {
                 String nome = result.getString(1);
-                String rg = result.getString(2);
-                Sexo sexo = Sexo.valueOf(result.getString(3));
-                String dataNascimento = result.getString(4);
-                pacienteList.add(new Paciente(nome, rg, sexo, dataNascimento));
+                String cpf = result.getString(2);
+                responsavelList.add(new Responsavel(nome, cpf));
             }
 
             desconectar();
-            System.out.println(pacienteList);
-            return pacienteList;
+            System.out.println(responsavelList);
+            return responsavelList;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,28 +54,23 @@ public class DAOPaciente {
         return null;
     }
 
-    public void cadastrarPaciente(Paciente paciente) {
+    public void cadastrarResponsavel(Responsavel responsavel) {
         try {
             conectar();
-            String sql = "INSERT INTO Paciente (nome, rg, sexo, dataNascimento) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Paciente (nome, cpf) VALUES (?, ?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
-            stmt.setString(1, paciente.getNome());
-            stmt.setString(2, paciente.getRg());
-            stmt.setString(3, paciente.getSexo().toString());
-            stmt.setDate(4, Date.valueOf(paciente.getDataNascimento()));
+            stmt.setString(1, responsavel.getNome());
+            stmt.setString(2, responsavel.getCpf());
 
             stmt.executeUpdate();
-
-            stmt.close();
             desconectar();
 
-            System.out.println("Paciente cadastrado com sucesso!");
-
+            
+            
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao cadastrar paciente: " + e.getMessage());
         }
     }
-
 }

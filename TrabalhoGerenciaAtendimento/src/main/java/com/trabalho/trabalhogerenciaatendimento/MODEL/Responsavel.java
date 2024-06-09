@@ -8,7 +8,9 @@ public class Responsavel {
     private String nome;
     private String cpf;
 
-    public Responsavel() {
+    public Responsavel(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
     }
 
     public Responsavel(int idResponsavel, int idDependente, String nome, String cpf) {

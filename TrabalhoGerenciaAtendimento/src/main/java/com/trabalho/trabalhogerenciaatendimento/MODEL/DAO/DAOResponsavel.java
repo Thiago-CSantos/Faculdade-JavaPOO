@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Responsavel;
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
 
 public class DAOResponsavel {
 
@@ -86,7 +85,7 @@ public class DAOResponsavel {
             while (result.next()) {
                 paciente = new Paciente(result.getInt(1));
             }
-
+            System.out.println("Paciente: " + paciente);
             return paciente;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,4 +93,44 @@ public class DAOResponsavel {
         }
 
     }
+
+    public Responsavel getRespoPaciente(String rgPaciente) {
+        try {
+            conectar();
+            String sql = "select r.nome, r.cpf from Responsavel r inner join Paciente p on p.idPacientePaciente = r.es_idDependente where p.rg = " + rgPaciente;
+
+            PreparedStatement com = conexao.prepareStatement(sql);
+
+            ResultSet result = com.executeQuery();
+            Responsavel responsavel = null;
+            while (result.next()) {
+                responsavel = new Responsavel(result.getString(1), result.getString(2));
+            }
+            System.out.println("Paciente: " + responsavel);
+            return responsavel;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+//    public Responsavel getResponsavel(int idPaciente){;
+//        try {
+//             conectar();
+//            String sql = "SELECT nome, cpf FROM Responsavel where es_idDependente = " + idPaciente;
+//
+//            PreparedStatement com = conexao.prepareStatement(sql);
+//
+//            ResultSet result = com.executeQuery();
+//            Responsavel responsavel = null;
+//            while (result.next()) {
+//                responsavel = new Responsavel(result.getString(1),result.getString(2));
+//            }
+//            System.out.println("Responsavel: " + responsavel);
+//            return responsavel;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 }

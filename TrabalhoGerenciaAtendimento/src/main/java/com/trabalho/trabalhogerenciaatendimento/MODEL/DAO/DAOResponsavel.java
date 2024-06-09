@@ -13,6 +13,7 @@ import com.trabalho.trabalhogerenciaatendimento.MODEL.Responsavel;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
 
 public class DAOResponsavel {
+
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
     private static final String PASS = "123456";
@@ -57,20 +58,40 @@ public class DAOResponsavel {
     public void cadastrarResponsavel(Responsavel responsavel) {
         try {
             conectar();
-            String sql = "INSERT INTO Paciente (nome, cpf) VALUES (?, ?)";
+            String sql = "INSERT INTO Responsavel (nome, cpf, es_idDependente) VALUES (?, ?, ?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
             stmt.setString(1, responsavel.getNome());
             stmt.setString(2, responsavel.getCpf());
+            stmt.setInt(3, responsavel.getIdDependente());
 
             stmt.executeUpdate();
             desconectar();
 
-            
-            
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao cadastrar paciente: " + e.getMessage());
         }
+    }
+
+    public Paciente getPacienteId(String rgPaciente) {
+        try {
+            conectar();
+            String sql = "SELECT idPacientePaciente FROM Paciente where rg = " + rgPaciente;
+
+            PreparedStatement com = conexao.prepareStatement(sql);
+
+            ResultSet result = com.executeQuery();
+            Paciente paciente = null;
+            while (result.next()) {
+                paciente = new Paciente(result.getInt(1));
+            }
+
+            return paciente;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

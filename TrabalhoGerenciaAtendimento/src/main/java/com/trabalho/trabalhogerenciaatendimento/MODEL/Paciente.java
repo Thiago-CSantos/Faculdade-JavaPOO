@@ -17,6 +17,10 @@ public class Paciente {
     public Paciente() {
     }
 
+    public Paciente(int idPaciente) {
+        this.idPacientePaciente = idPaciente;
+    }
+
     public Paciente(String nome, String rg, Sexo sexo, String dataNascimento) {
         this.nome = nome;
         this.rg = rg;
@@ -79,8 +83,12 @@ public class Paciente {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Paciente paciente)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Paciente paciente)) {
+            return false;
+        }
         return getIdPacientePaciente() == paciente.getIdPacientePaciente() && Objects.equals(getNome(), paciente.getNome()) && Objects.equals(getRg(), paciente.getRg()) && getSexo() == paciente.getSexo() && Objects.equals(getDataNascimento(), paciente.getDataNascimento()) && Objects.equals(senhaAtendimento, paciente.senhaAtendimento);
     }
 

@@ -29,7 +29,7 @@ public class DAOPaciente {
     public List<Paciente> listarPaciente() {
         try {
             conectar();
-            String sql = "SELECT nome, rg, sexo, dataNascimento FROM Paciente";
+            String sql = "SELECT nome, rg, sexo, dataNascimento, idPacientePaciente FROM Paciente";
             PreparedStatement com = conexao.prepareStatement(sql);
 
             ResultSet result = com.executeQuery();
@@ -39,7 +39,8 @@ public class DAOPaciente {
                 String rg = result.getString(2);
                 Sexo sexo = Sexo.valueOf(result.getString(3));
                 String dataNascimento = result.getString(4);
-                pacienteList.add(new Paciente(nome, rg, sexo, dataNascimento));
+                int idPaciente = result.getInt(5);
+                pacienteList.add(new Paciente(idPaciente,nome, rg, sexo, dataNascimento));
             }
 
             desconectar();

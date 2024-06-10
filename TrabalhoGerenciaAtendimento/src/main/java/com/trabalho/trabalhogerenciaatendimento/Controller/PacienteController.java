@@ -37,7 +37,7 @@ public class PacienteController {
     public void gerarTableModel(JTable tabelaPacientes) {
 
         DefaultTableModel modelo = (DefaultTableModel) tabelaPacientes.getModel();
-        Object[] objetos = new Object[6];
+        Object[] objetos = new Object[7];
 
         List<Paciente> item = dao.listarPaciente();
 
@@ -46,6 +46,7 @@ public class PacienteController {
             objetos[1] = paciente.getRg();
             objetos[2] = paciente.getSexo();
             objetos[3] = paciente.getDataNascimento();
+            objetos[6] = paciente.getIdPacientePaciente();
             // campos do Responsavel
             Responsavel r = daoResponsavel.getRespoPaciente(paciente.getRg());
 

@@ -1,21 +1,25 @@
 package com.trabalho.trabalhogerenciaatendimento.MODEL.DAO;
 
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Senha;
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DAOSenha {
+
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
     private static final String PASS = "123456";
     private Connection conexao = null;
+    private PreparedStatement com = null;
     private List<Senha> senhaList = new ArrayList<>();
 
     public DAOSenha() {
@@ -29,33 +33,30 @@ public class DAOSenha {
         conexao.close();
     }
 
-
     public void gerarSenha(Senha senha) {
-        PreparedStatement com = null;
-    
         try {
             conectar();
-            conexao.setAutoCommit(false); 
-    
+            conexao.setAutoCommit(false);
+
             String sql = "INSERT INTO Senha (es_idPaciente, dataGeracao, especialidade) VALUES (?, ?, ?)";
             com = conexao.prepareStatement(sql);
-            
+
             com.setInt(1, senha.getIdPaciente());
             com.setString(2, senha.getDataGeracao());
             com.setString(3, senha.getEspecialidade().toString());
-    
+
             com.executeUpdate();
-            conexao.commit(); // Confirmar a transação
-    
-            System.out.println("Senha " + senha + " cadastrada com sucesso");
+            conexao.commit();
+
+            System.out.println("Senha " + senha.getIdPaciente() + " cadastrada com sucesso");
 
             desconectar();
-    
+
         } catch (SQLException e) {
             e.printStackTrace();
             try {
                 if (conexao != null) {
-                    conexao.rollback(); // Reverter a transação em caso de erro
+                    conexao.rollback();
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -65,15 +66,40 @@ public class DAOSenha {
         } finally {
             try {
                 if (com != null) {
-                    com.close(); // Fechar o PreparedStatement
+                    com.close();
                 }
                 if (conexao != null) {
-                    conexao.close(); // Fechar a conexão
+                    conexao.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
-    
+
+    public String getSenha(Paciente rg) {
+        try {
+            
+            conectar();
+
+            String sql = "SELECT idSenha FROM Senha WHERE es_idPaciente = (SELECT idPacientePaciente FROM Paciente WHERE rg = ? AND idSenha = ? AND dataGeracao >= DATE_SUB(NOW(), INTERVAL 200 SECOND))";
+            com = conexao.prepareStatement(sql);
+
+            com.setString(1, rg.getRg());
+            com.setInt(2, rg.getIdPacientePaciente());
+            ResultSet result = com.executeQuery();
+            Integer idSenha = null;
+            if (result.next()) {
+                idSenha = result.getInt(1);
+            }
+            System.out.println("Senha: " + idSenha);
+            desconectar();
+            return idSenha != null ? idSenha.toString() : "error";
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

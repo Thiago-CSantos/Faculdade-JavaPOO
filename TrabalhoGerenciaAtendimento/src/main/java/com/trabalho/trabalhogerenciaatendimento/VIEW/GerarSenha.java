@@ -1,21 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.trabalho.trabalhogerenciaatendimento.VIEW;
 
 import com.trabalho.trabalhogerenciaatendimento.Controller.PacienteController;
 import com.trabalho.trabalhogerenciaatendimento.Controller.ResponsavelController;
 import com.trabalho.trabalhogerenciaatendimento.Controller.SenhaController;
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Responsavel;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Senha;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
-import javax.swing.table.DefaultTableModel;
+import java.util.Date;
 
 public class GerarSenha extends javax.swing.JFrame {
 
@@ -25,6 +20,8 @@ public class GerarSenha extends javax.swing.JFrame {
 
     public GerarSenha() {
         initComponents();
+        tabelaPacientes.getColumnModel().getColumn(6).setMinWidth(0);
+        tabelaPacientes.getColumnModel().getColumn(6).setMaxWidth(0);
 
         controller = new PacienteController();
         controller.gerarTableModel(tabelaPacientes);
@@ -32,9 +29,6 @@ public class GerarSenha extends javax.swing.JFrame {
         controllerSenha = new SenhaController();
 
         controllerResponsavel = new ResponsavelController();
-
-
-
 
     }
 
@@ -60,11 +54,11 @@ public class GerarSenha extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "RG", "Sexo", "Data", "Nome do responsavel", "CPF"
+                "Nome", "RG", "Sexo", "Data", "Nome do responsavel", "CPF", "id"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -163,16 +157,21 @@ public class GerarSenha extends javax.swing.JFrame {
             String sexo = tabelaPacientes.getValueAt(linha, 2).toString();
             String data = tabelaPacientes.getValueAt(linha, 3).toString();
             Especialidade especialidade = Especialidade.valueOf(jComboBox1.getSelectedItem().toString());
+            Integer id = (Integer) tabelaPacientes.getValueAt(linha, 6);
 
             System.out.println("Nome: " + nome + " RG: " + rg + " Sexo: " + sexo + " Data: " + data + " Especialidade: " + especialidade);
-            
+
             int es_idDependente = controller.getIdPaciente(rg);
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date().getTime());
 
             Senha senha = new Senha(timeStamp, especialidade, es_idDependente);
 
             controllerSenha.gerarSenha(senha);
-            
+            Paciente paciente = new Paciente(id, nome, rg, Sexo.valueOf(sexo), data);
+           
+            DiagnosticoMedico panel =new DiagnosticoMedico(paciente);
+            panel.setVisible(true);
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

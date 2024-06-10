@@ -1,7 +1,7 @@
 package com.trabalho.trabalhogerenciaatendimento.Controller;
 
-import com.trabalho.trabalhogerenciaatendimento.MODEL.DAO.DAOResponsavel;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.DAO.DAOSenha;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Senha;
 
 public class SenhaController {
@@ -16,5 +16,9 @@ public class SenhaController {
 
     public void gerarSenha(Senha senha) {
         dao.gerarSenha(senha);
+    }
+    
+    public String getSenha(Paciente paciente){
+        return dao.getSenha(paciente);
     }
 }

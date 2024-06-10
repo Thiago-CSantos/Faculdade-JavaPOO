@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Senha {
     private int idSenha;
     private String dataGeracao;
+    private Date dataGeracaoa;
     private Especialidade especialidade;
     private int idPaciente;
 
@@ -16,6 +17,12 @@ public class Senha {
 
     public Senha(String dataGeracao, Especialidade especialidade, int idPaciente) {
         this.dataGeracao = dataGeracao;
+        this.especialidade = especialidade;
+        this.idPaciente = idPaciente;
+    }
+
+    public Senha(Date dataGeracao, Especialidade especialidade, int idPaciente) {
+        this.dataGeracaoa = dataGeracao;
         this.especialidade = especialidade;
         this.idPaciente = idPaciente;
     }

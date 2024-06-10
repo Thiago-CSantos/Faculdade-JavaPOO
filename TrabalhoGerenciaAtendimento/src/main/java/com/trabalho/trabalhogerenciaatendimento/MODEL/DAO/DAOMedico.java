@@ -10,7 +10,7 @@ import java.util.List;
 public class DAOMedico {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
-    private static final String PASS = "123456";
+    private static final String PASS = "1234";
     private Connection conexao = null;
     private List<Medico> medicoList = new ArrayList<>();
 
@@ -28,7 +28,7 @@ public class DAOMedico {
     public List<Medico> listarMedico() {
         try {
             conectar();
-            String sql = "SELECT CRM, nome, rg, cpf, dataNascimento, foto, especialidad FROM Medico";
+            String sql = "SELECT CRM, nome, rg, cpf, dataNascimento, foto, especialidade FROM Medico";
             PreparedStatement com = conexao.prepareStatement(sql);
 
             ResultSet result = com.executeQuery();

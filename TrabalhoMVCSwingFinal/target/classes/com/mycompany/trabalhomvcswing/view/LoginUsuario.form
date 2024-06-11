@@ -89,11 +89,15 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnLogin" max="32767" attributes="0"/>
+<<<<<<< HEAD
                               <Group type="102" attributes="0">
                                   <Component id="lblResposta" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnNaoCadastro" min="-2" max="-2" attributes="0"/>
                               </Group>
+=======
+                              <Component id="lblResposta" max="32767" attributes="0"/>
+>>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff
                           </Group>
                       </Group>
                   </Group>
@@ -116,11 +120,17 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="btnNaoCadastro" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblResposta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+=======
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lblResposta" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="32" max="32767" attributes="0"/>
+>>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff
               </Group>
           </Group>
         </DimensionLayout>
@@ -189,6 +199,7 @@
             </Property>
           </Properties>
         </Component>
+<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="btnNaoCadastro">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -204,6 +215,8 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNaoCadastroActionPerformed"/>
           </Events>
         </Component>
+=======
+>>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">

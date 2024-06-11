@@ -8,6 +8,7 @@ import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Senha;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,8 +20,14 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
 
     private MedicoController controller = null;
 
+    private Paciente pacientes = null;
+
     public DiagnosticoMedico(Paciente paciente, Especialidade especialidade) {
         controllerSenha = new SenhaController();
+        if (pacientes != null) {
+            pacientes = new Paciente();
+            pacientes = paciente;
+        }
         String senha = controllerSenha.getSenha(paciente);
 
         initComponents();
@@ -28,9 +35,10 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
         controller = new MedicoController();
         controller.gerarTableModel2(jtableMedicosArea, especialidade);
         lblSenha.setText(senha);
-        
+
         jtableMedicosArea.getColumnModel().getColumn(2).setMinWidth(0);
         jtableMedicosArea.getColumnModel().getColumn(2).setMaxWidth(0);
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -151,16 +159,23 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         String diagnostico = txtDiagnostico.getText();
         String tratamento = txtTratamento.getText();
-        
-         int linha = jtableMedicosArea.getSelectedRow();
+        String medico = "";
+        int linha = jtableMedicosArea.getSelectedRow();
         if (linha != -1) {
             String nome = jtableMedicosArea.getValueAt(linha, 0).toString();
             String CRM = jtableMedicosArea.getValueAt(linha, 1).toString();
-            Integer id = (Integer) jtableMedicosArea.getValueAt(linha, 2);       
-
+            Integer id = (Integer) jtableMedicosArea.getValueAt(linha, 2);
+            medico = " Nome: " + nome + " CRM: " + CRM + "\n Tratamento: " + tratamento + "\n Diagnostico: " + diagnostico;
+            JOptionPane.showMessageDialog(rootPane, medico, "Diagnostico", JOptionPane.INFORMATION_MESSAGE);
             
-
+            // insert
+            
         }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Por favor selecione um médico", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        
     }//GEN-LAST:event_btnOKActionPerformed
 
     /**

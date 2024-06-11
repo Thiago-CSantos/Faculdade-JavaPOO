@@ -41,13 +41,8 @@
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-<<<<<<< HEAD
               <Component id="jpanelCadastrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="99" max="32767" attributes="0"/>
-=======
-              <Component id="jpanelCadastrar" max="32767" attributes="0"/>
-              <EmptySpace pref="89" max="32767" attributes="0"/>
->>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,28 +96,16 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
                           <Component id="btnCadastrar" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
                           <Component id="btnProximo" min="-2" max="-2" attributes="0"/>
-=======
-                          <Component id="jButton1" max="32767" attributes="0"/>
->>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-<<<<<<< HEAD
               <Component id="lblResposta" alignment="1" max="32767" attributes="0"/>
-=======
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="lblResposta" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
-              </Group>
->>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -139,19 +122,12 @@
                       <Component id="txtSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-<<<<<<< HEAD
                   <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="lblResposta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="btnProximo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-=======
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="lblResposta" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
->>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff
               </Group>
           </Group>
         </DimensionLayout>
@@ -191,11 +167,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailActionPerformed"/>
           </Events>
         </Component>
-<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="btnCadastrar">
-=======
-        <Component class="javax.swing.JButton" name="jButton1">
->>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="18" style="1"/>
@@ -207,7 +179,6 @@
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
-<<<<<<< HEAD
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarActionPerformed"/>
           </Events>
         </Component>
@@ -221,16 +192,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtSenha">
           <Properties>
-=======
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblResposta">
-        </Component>
-        <Component class="javax.swing.JPasswordField" name="txtSenha">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
->>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                 <BevelBorder/>
@@ -238,7 +199,6 @@
             </Property>
           </Properties>
         </Component>
-<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="btnProximo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -254,8 +214,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProximoActionPerformed"/>
           </Events>
         </Component>
-=======
->>>>>>> 1744141065066c63aba2b0bc5cbc23e1e45e27ff
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">

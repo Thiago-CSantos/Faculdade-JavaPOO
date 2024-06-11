@@ -1,6 +1,7 @@
 package com.trabalho.trabalhogerenciaatendimento.Controller;
 
 import com.trabalho.trabalhogerenciaatendimento.MODEL.DAO.DAOMedico;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
 
 import java.util.List;
 
@@ -21,6 +22,25 @@ public class MedicoController {
     
     public void cadastrarMedico(Medico medico){
         dao.cadastrarMedico(medico);
+    }
+    
+    public void gerarTableModel2(JTable tabelaMedicos, Especialidade especialidade) {
+
+        DefaultTableModel modelo = (DefaultTableModel) tabelaMedicos.getModel();
+        Object[] objetos = new Object[3];
+
+        String especiali = especialidade.toString();
+        
+        List<Medico> item = dao.listarMedicoByArea(especiali);
+
+        for (Medico medico : item) {
+            objetos[0] = medico.getNome();
+            objetos[1] = medico.getCRM();
+            objetos[2] = medico.getIdMedico();
+
+            modelo.addRow(objetos);
+        }
+
     }
 
     public void gerarTableModel(JTable tabelaMedicos) {

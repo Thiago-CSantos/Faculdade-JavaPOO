@@ -169,7 +169,7 @@ public class GerarSenha extends javax.swing.JFrame {
             controllerSenha.gerarSenha(senha);
             Paciente paciente = new Paciente(id, nome, rg, Sexo.valueOf(sexo), data);
            
-            DiagnosticoMedico panel =new DiagnosticoMedico(paciente);
+            DiagnosticoMedico panel =new DiagnosticoMedico(paciente, especialidade);
             panel.setVisible(true);
 
         }

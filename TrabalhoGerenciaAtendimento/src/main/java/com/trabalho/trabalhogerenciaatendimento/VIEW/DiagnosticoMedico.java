@@ -1,7 +1,13 @@
 package com.trabalho.trabalhogerenciaatendimento.VIEW;
 
+import com.trabalho.trabalhogerenciaatendimento.Controller.MedicoController;
 import com.trabalho.trabalhogerenciaatendimento.Controller.SenhaController;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
+import com.trabalho.trabalhogerenciaatendimento.MODEL.Senha;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -10,16 +16,21 @@ import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 public class DiagnosticoMedico extends javax.swing.JFrame {
 
     private SenhaController controllerSenha = null;
-    
-    
-    
-    public DiagnosticoMedico(Paciente paciente) {
+
+    private MedicoController controller = null;
+
+    public DiagnosticoMedico(Paciente paciente, Especialidade especialidade) {
         controllerSenha = new SenhaController();
         String senha = controllerSenha.getSenha(paciente);
-        
-        
-        initComponents();        
+
+        initComponents();
+
+        controller = new MedicoController();
+        controller.gerarTableModel2(jtableMedicosArea, especialidade);
         lblSenha.setText(senha);
+        
+        jtableMedicosArea.getColumnModel().getColumn(2).setMinWidth(0);
+        jtableMedicosArea.getColumnModel().getColumn(2).setMaxWidth(0);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,12 +40,13 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        txtDiagnostico = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtTratamento = new javax.swing.JTextField();
+        btnOK = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtableMedicosArea = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setText("SENHA:");
 
@@ -42,19 +54,32 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
 
         jLabel3.setText("DIAGNOSTICO:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtDiagnostico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtDiagnosticoActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("NOME DO MEDICO: ");
-
-        jLabel5.setText("ROBERVAL");
-
         jLabel6.setText("TRATAMENTO:");
 
-        jButton1.setText("OK");
+        btnOK.setText("OK");
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
+
+        jtableMedicosArea.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "CRM", "id"
+            }
+        ));
+        jScrollPane1.setViewportView(jtableMedicosArea);
+
+        jLabel2.setText("Qual Medico da Area?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,21 +95,26 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
+                            .addComponent(txtDiagnostico)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField2)))))
-                .addGap(39, 39, 39)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtTratamento))
+                                .addGap(97, 97, 97)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jButton1))
-                .addGap(98, 98, 98))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(172, 172, 172))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(272, 272, 272)
+                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,25 +126,42 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTratamento, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtDiagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiagnosticoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtDiagnosticoActionPerformed
+
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+        String diagnostico = txtDiagnostico.getText();
+        String tratamento = txtTratamento.getText();
+        
+         int linha = jtableMedicosArea.getSelectedRow();
+        if (linha != -1) {
+            String nome = jtableMedicosArea.getValueAt(linha, 0).toString();
+            String CRM = jtableMedicosArea.getValueAt(linha, 1).toString();
+            Integer id = (Integer) jtableMedicosArea.getValueAt(linha, 2);       
+
+            
+
+        }
+    }//GEN-LAST:event_btnOKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,20 +193,21 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DiagnosticoMedico(null).setVisible(true);
+                new DiagnosticoMedico(null, null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnOK;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtableMedicosArea;
     private javax.swing.JLabel lblSenha;
+    private javax.swing.JTextField txtDiagnostico;
+    private javax.swing.JTextField txtTratamento;
     // End of variables declaration//GEN-END:variables
 }

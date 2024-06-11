@@ -17,7 +17,7 @@ public class DAOSenha {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
-    private static final String PASS = "123456";
+    private static final String PASS = "3443";
     private Connection conexao = null;
     private PreparedStatement com = null;
     private List<Senha> senhaList = new ArrayList<>();
@@ -39,6 +39,7 @@ public class DAOSenha {
             conexao.setAutoCommit(false);
 
             String sql = "INSERT INTO Senha (es_idPaciente, dataGeracao, especialidade) VALUES (?, ?, ?)";
+
             com = conexao.prepareStatement(sql);
 
             com.setInt(1, senha.getIdPaciente());
@@ -79,14 +80,19 @@ public class DAOSenha {
 
     public String getSenha(Paciente rg) {
         try {
-            
             conectar();
 
-            String sql = "SELECT idSenha FROM Senha WHERE es_idPaciente = (SELECT idPacientePaciente FROM Paciente WHERE rg = ? AND idSenha = ? AND dataGeracao >= DATE_SUB(NOW(), INTERVAL 200 SECOND))";
+            // Subconsulta para obter o idPaciente baseado no rg
+            String subquery = "(SELECT idPacientePaciente FROM Paciente WHERE rg = ?)";
+
+            // Consulta principal para obter a senha baseada no idPaciente e na data de geração
+            String sql = "SELECT idSenha FROM Senha WHERE es_idPaciente = " + subquery + " AND dataGeracao >= NOW()";
+
             com = conexao.prepareStatement(sql);
 
+            // Configurando o parâmetro rg na subconsulta
             com.setString(1, rg.getRg());
-            com.setInt(2, rg.getIdPacientePaciente());
+
             ResultSet result = com.executeQuery();
             Integer idSenha = null;
             if (result.next()) {
@@ -94,11 +100,22 @@ public class DAOSenha {
             }
             System.out.println("Senha: " + idSenha);
             desconectar();
-            return idSenha != null ? idSenha.toString() : "error";
+            return idSenha != null ? idSenha.toString() : "error: senha não encontrada ou expirada";
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return "error: " + e.getMessage();
+        } finally {
+            try {
+                if (com != null) {
+                    com.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

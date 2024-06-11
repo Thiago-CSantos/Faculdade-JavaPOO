@@ -10,7 +10,7 @@ import java.util.List;
 public class DAOMedico {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
-    private static final String PASS = "1234";
+    private static final String PASS = "3443";
     private Connection conexao = null;
     private List<Medico> medicoList = new ArrayList<>();
 
@@ -23,6 +23,32 @@ public class DAOMedico {
 
     protected void desconectar() throws SQLException {
         conexao.close();
+    }
+    
+    public List<Medico> listarMedicoByArea(String especialidade) {
+        try {
+            conectar();
+            String sql = "SELECT nome, CRM, idMedico FROM Medico where especialidade = ? ";
+            PreparedStatement com = conexao.prepareStatement(sql);
+
+            com.setString(1, especialidade);
+            ResultSet result = com.executeQuery();
+
+            while (result.next()) {
+                String nome = result.getString(1);
+                String CRM = result.getString(2);
+                Integer idMedico = result.getInt(3);
+                medicoList.add(new Medico(idMedico, CRM, nome));
+            }
+
+            desconectar();
+            System.out.println(medicoList);
+            return medicoList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public List<Medico> listarMedico() {

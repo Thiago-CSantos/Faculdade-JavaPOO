@@ -25,6 +25,14 @@ public class Medico {
         this.especialidade = especialidade;
     }
 
+    public Medico(int idMedico, String CRM, String nome) {
+        this.idMedico = idMedico;
+        this.CRM = CRM;
+        this.nome = nome;
+    }
+    
+    
+
     public Medico(int idMedico, String CRM, String nome, String rg, String cpf, String dataNascimento, String foto, Especialidade especialidade) {
         this.idMedico = idMedico;
         this.CRM = CRM;

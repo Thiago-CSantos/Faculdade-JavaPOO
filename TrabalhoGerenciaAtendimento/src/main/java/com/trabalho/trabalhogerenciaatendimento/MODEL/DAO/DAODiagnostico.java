@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.trabalho.trabalhogerenciaatendimento.MODEL.DAO;
 
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
@@ -12,14 +8,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author rafap
- */
 public class DAODiagnostico {
+
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
     private static final String PASS = "3443";
@@ -37,15 +34,33 @@ public class DAODiagnostico {
         conexao.close();
     }
 
-    public List<Paciente> listarDiagnostico() {
+    public void InsertDiagnostico(String es_idSenha, String es_CRMmedico,
+            LocalDateTime data_hora, String diagnostico, String tratamento) {
         try {
             conectar();
-            
+            String sql = "INSERT INTO Diagnostico (es_idSenha, es_CRMmedico, data_hora, diagnostico,tratamento )"
+                    + " VALUES (?, ?, ?, ?,?)";
+            PreparedStatement com = conexao.prepareStatement(sql);
 
+            com.setString(1, es_idSenha);
+            com.setString(2, es_CRMmedico);
+            com.setTimestamp(3, Timestamp.valueOf(data_hora));
+            com.setString(4, diagnostico);
+            com.setString(5, tratamento);
+
+            com.executeUpdate();
+
+            conexao.commit();
+            desconectar();
+            com.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                conexao.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAODiagnostico.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        return null;
     }
 
 //    public void cadastrarDiagnostico(Diagnostico diagnostico,) {

@@ -1,5 +1,6 @@
 package com.trabalho.trabalhogerenciaatendimento.VIEW;
 
+import com.trabalho.trabalhogerenciaatendimento.Controller.DiagnosticoController;
 import com.trabalho.trabalhogerenciaatendimento.Controller.MedicoController;
 import com.trabalho.trabalhogerenciaatendimento.Controller.SenhaController;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
@@ -7,6 +8,7 @@ import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Senha;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -21,6 +23,8 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
     private MedicoController controller = null;
 
     private Paciente pacientes = null;
+    
+    private DiagnosticoController controllerDiag = null;
 
     public DiagnosticoMedico(Paciente paciente, Especialidade especialidade) {
         controllerSenha = new SenhaController();
@@ -30,6 +34,10 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
         }
         String senha = controllerSenha.getSenha(paciente);
 
+        if(controllerDiag == null){
+            controllerDiag =  new DiagnosticoController();
+        }
+        
         initComponents();
 
         controller = new MedicoController();
@@ -169,6 +177,7 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, medico, "Diagnostico", JOptionPane.INFORMATION_MESSAGE);
             
             // insert
+            controllerDiag.InsertDiagnostico(lblSenha.getText(),CRM,LocalDateTime.now(),diagnostico,tratamento);
             
         }
         else{

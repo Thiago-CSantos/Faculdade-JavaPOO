@@ -9,8 +9,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Medico;
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Responsavel;
 
 public class MedicoController {
     

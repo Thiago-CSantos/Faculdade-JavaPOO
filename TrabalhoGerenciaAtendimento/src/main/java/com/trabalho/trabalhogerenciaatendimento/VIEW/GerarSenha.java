@@ -9,8 +9,12 @@ import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class GerarSenha extends javax.swing.JFrame {
 
@@ -147,6 +151,7 @@ public class GerarSenha extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -162,15 +167,43 @@ public class GerarSenha extends javax.swing.JFrame {
             System.out.println("Nome: " + nome + " RG: " + rg + " Sexo: " + sexo + " Data: " + data + " Especialidade: " + especialidade);
 
             int es_idDependente = controller.getIdPaciente(rg);
+
             String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date().getTime());
 
-            Senha senha = new Senha(timeStamp, especialidade, es_idDependente);
+            // Formato da data de nascimento
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            // Converter String para LocalDate
+            LocalDate dataNascimento = LocalDate.parse(data, formatter);
+            // Data atual
+            LocalDate dataAtual = LocalDate.now();
+            // Calcular a idade
+            int idade = Period.between(dataNascimento, dataAtual).getYears();
 
-            controllerSenha.gerarSenha(senha);
-            Paciente paciente = new Paciente(id, nome, rg, Sexo.valueOf(sexo), data);
-           
-            DiagnosticoMedico panel =new DiagnosticoMedico(paciente, especialidade);
-            panel.setVisible(true);
+            if (especialidade == Especialidade.PEDIATRIA || idade < 18) {
+
+                if (("".equals(tabelaPacientes.getValueAt(linha, 4).toString()))) {
+                    JOptionPane.showMessageDialog(rootPane, "Para iniciar uma consulta com um medico o paciente em questão tem que ter um responsável", "Error", JOptionPane.ERROR_MESSAGE);
+                    CadastrarResponsavel cr = new CadastrarResponsavel();
+                    cr.setVisible(true);
+                } else {
+                    Senha senha = new Senha(timeStamp, especialidade, es_idDependente);
+
+                    controllerSenha.gerarSenha(senha);
+                    Paciente paciente = new Paciente(id, nome, rg, Sexo.valueOf(sexo), data);
+
+                    DiagnosticoMedico panel = new DiagnosticoMedico(paciente, especialidade);
+                    panel.setVisible(true);
+                }
+
+            } else {
+                Senha senha = new Senha(timeStamp, especialidade, es_idDependente);
+
+                controllerSenha.gerarSenha(senha);
+                Paciente paciente = new Paciente(id, nome, rg, Sexo.valueOf(sexo), data);
+
+                DiagnosticoMedico panel = new DiagnosticoMedico(paciente, especialidade);
+                panel.setVisible(true);
+            }
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed

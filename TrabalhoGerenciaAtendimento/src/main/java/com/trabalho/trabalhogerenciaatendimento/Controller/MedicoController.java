@@ -11,24 +11,24 @@ import javax.swing.table.DefaultTableModel;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Medico;
 
 public class MedicoController {
-    
+
     private DAOMedico dao = null;
-    
-    public MedicoController(){
+
+    public MedicoController() {
         dao = new DAOMedico();
     }
-    
-    public void cadastrarMedico(Medico medico){
+
+    public void cadastrarMedico(Medico medico) {
         dao.cadastrarMedico(medico);
     }
-    
+
     public void gerarTableModel2(JTable tabelaMedicos, Especialidade especialidade) {
 
         DefaultTableModel modelo = (DefaultTableModel) tabelaMedicos.getModel();
         Object[] objetos = new Object[3];
 
         String especiali = especialidade.toString();
-        
+
         List<Medico> item = dao.listarMedicoByArea(especiali);
 
         for (Medico medico : item) {
@@ -53,14 +53,17 @@ public class MedicoController {
             objetos[1] = medico.getNome();
             objetos[2] = medico.getRg();
             objetos[3] = medico.getCpf();
-            objetos[4] = medico.getDataNascimento();   
-            objetos[5] = medico.getFoto();  
+            objetos[4] = medico.getDataNascimento();
+            objetos[5] = medico.getFoto();
             objetos[6] = medico.getEspecialidade();
-
 
             modelo.addRow(objetos);
         }
 
     }
-    
+
+    public List<Medico> listAllMedico() {
+        return dao.listarMedico();
+    }
+
 }

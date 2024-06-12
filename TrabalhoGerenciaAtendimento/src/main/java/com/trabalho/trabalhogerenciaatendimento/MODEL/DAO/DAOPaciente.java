@@ -40,7 +40,7 @@ public class DAOPaciente {
                 Sexo sexo = Sexo.valueOf(result.getString(3));
                 String dataNascimento = result.getString(4);
                 int idPaciente = result.getInt(5);
-                pacienteList.add(new Paciente(idPaciente,nome, rg, sexo, dataNascimento));
+                pacienteList.add(new Paciente(idPaciente, nome, rg, sexo, dataNascimento));
             }
 
             desconectar();
@@ -65,10 +65,9 @@ public class DAOPaciente {
             com.setDate(4, Date.valueOf(paciente.getDataNascimento()));
 
             com.executeUpdate();
-//            com.close();
+            conexao.commit();
             desconectar();
 
-            conexao.commit();
             System.out.println("Paciente cadastrado com sucesso!");
 
         } catch (SQLException e) {

@@ -7,6 +7,7 @@ import com.trabalho.trabalhogerenciaatendimento.MODEL.Senha;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
+import java.sql.SQLException;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -14,6 +15,8 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class GerarSenha extends javax.swing.JFrame {
@@ -187,7 +190,11 @@ public class GerarSenha extends javax.swing.JFrame {
                 } else {
                     Senha senha = new Senha(timeStamp, especialidade, es_idDependente);
 
-                    controllerSenha.gerarSenha(senha);
+                    try {
+                        controllerSenha.gerarSenha(senha);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(GerarSenha.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     Paciente paciente = new Paciente(id, nome, rg, Sexo.valueOf(sexo), data);
 
                     DiagnosticoMedico panel = new DiagnosticoMedico(paciente, especialidade);
@@ -197,7 +204,11 @@ public class GerarSenha extends javax.swing.JFrame {
             } else {
                 Senha senha = new Senha(timeStamp, especialidade, es_idDependente);
 
-                controllerSenha.gerarSenha(senha);
+                try {
+                    controllerSenha.gerarSenha(senha);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GerarSenha.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 Paciente paciente = new Paciente(id, nome, rg, Sexo.valueOf(sexo), data);
 
                 DiagnosticoMedico panel = new DiagnosticoMedico(paciente, especialidade);
@@ -210,7 +221,7 @@ public class GerarSenha extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         CadastrarPaciente panel = new CadastrarPaciente();
         panel.setVisible(true);
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

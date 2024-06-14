@@ -4,6 +4,7 @@ import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.DAO.DAOPaciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.DAO.DAOResponsavel;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Responsavel;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -22,7 +23,7 @@ public class PacienteController {
         }
     }
 
-    public void cadastrarPaciente(Paciente paciente) {
+    public void cadastrarPaciente(Paciente paciente) throws SQLException {
         dao.cadastrarPaciente(paciente);
     }
 

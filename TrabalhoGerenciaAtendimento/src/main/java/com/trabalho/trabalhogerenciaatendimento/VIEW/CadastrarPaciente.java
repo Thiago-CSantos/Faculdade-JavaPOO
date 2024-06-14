@@ -7,6 +7,9 @@ package com.trabalho.trabalhogerenciaatendimento.VIEW;
 import com.trabalho.trabalhogerenciaatendimento.Controller.PacienteController;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -158,7 +161,11 @@ public class CadastrarPaciente extends javax.swing.JFrame {
         System.out.println("Sexo: " + sexo);
 
         Paciente paciente = new Paciente(nome, rg, sexo, dataNascimento);
-        controller.cadastrarPaciente(paciente);
+        try {
+            controller.cadastrarPaciente(paciente);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -3,6 +3,7 @@ package com.trabalho.trabalhogerenciaatendimento.Controller;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Responsavel;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.DAO.DAOResponsavel;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
+import java.sql.SQLException;
 
 public class ResponsavelController {
 
@@ -15,7 +16,7 @@ public class ResponsavelController {
     }
 
 
-    public void cadastrarResponsavel(Responsavel responsavel) {
+    public void cadastrarResponsavel(Responsavel responsavel) throws SQLException {
         dao.cadastrarResponsavel(responsavel);
     }
     

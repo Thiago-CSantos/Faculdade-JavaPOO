@@ -56,6 +56,8 @@ public class DAOPaciente {
     public void cadastrarPaciente(Paciente paciente) {
         try {
             conectar();
+            conexao.setAutoCommit(false);
+
             String sql = "INSERT INTO Paciente (nome, rg, sexo, dataNascimento) VALUES (?, ?, ?, ?)";
             PreparedStatement com = conexao.prepareStatement(sql);
 

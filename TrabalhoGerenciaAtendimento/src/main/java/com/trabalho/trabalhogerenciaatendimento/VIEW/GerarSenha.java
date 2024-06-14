@@ -170,13 +170,12 @@ public class GerarSenha extends javax.swing.JFrame {
 
             String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date().getTime());
 
-            // Formato da data de nascimento
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            // Converter String para LocalDate
+
             LocalDate dataNascimento = LocalDate.parse(data, formatter);
-            // Data atual
+
             LocalDate dataAtual = LocalDate.now();
-            // Calcular a idade
+
             int idade = Period.between(dataNascimento, dataAtual).getYears();
 
             if (especialidade == Especialidade.PEDIATRIA || idade < 18) {

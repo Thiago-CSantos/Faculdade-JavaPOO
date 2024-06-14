@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.trabalho.trabalhogerenciaatendimento.VIEW;
 
-import com.trabalho.trabalhogerenciaatendimento.Controller.MedicoController;
+
 import com.trabalho.trabalhogerenciaatendimento.Controller.ResponsavelController;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Responsavel;

@@ -1,8 +1,6 @@
 package com.trabalho.trabalhogerenciaatendimento.MODEL;
 
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
-
-import java.util.Date;
 import java.util.Objects;
 
 public class Medico {

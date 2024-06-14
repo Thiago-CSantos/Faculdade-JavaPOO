@@ -83,6 +83,8 @@ public class DAOMedico {
     public void cadastrarMedico(Medico medico) {
         try {
             conectar();
+            conexao.setAutoCommit(false);
+
             String sql = "INSERT INTO Medico (CRM, nome, rg, cpf, dataNascimento, foto, especialidade) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement com = conexao.prepareStatement(sql);
 

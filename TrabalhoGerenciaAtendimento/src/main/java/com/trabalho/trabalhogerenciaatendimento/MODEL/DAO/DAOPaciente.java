@@ -11,9 +11,9 @@ public class DAOPaciente {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
-    private static final String PASS = "3443";
+    private static final String PASS = "123456";
     private Connection conexao = null;
-    private List<Paciente> pacienteList = new ArrayList<>();
+    private List<Paciente> pacienteList = null;
 
     public DAOPaciente() {
     }
@@ -28,6 +28,7 @@ public class DAOPaciente {
 
     public List<Paciente> listarPaciente() {
         try {
+            pacienteList = new ArrayList<>();
             conectar();
             String sql = "SELECT nome, rg, sexo, dataNascimento, idPacientePaciente FROM Paciente";
             PreparedStatement com = conexao.prepareStatement(sql);

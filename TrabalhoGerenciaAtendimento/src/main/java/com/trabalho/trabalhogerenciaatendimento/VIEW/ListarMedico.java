@@ -5,20 +5,14 @@
 package com.trabalho.trabalhogerenciaatendimento.VIEW;
 
 import com.trabalho.trabalhogerenciaatendimento.Controller.MedicoController;
-import com.trabalho.trabalhogerenciaatendimento.Controller.PacienteController;
-import com.trabalho.trabalhogerenciaatendimento.Controller.ResponsavelController;
-import com.trabalho.trabalhogerenciaatendimento.Controller.SenhaController;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
-import com.trabalho.trabalhogerenciaatendimento.MODEL.Medico;
 import java.awt.Image;
-import java.time.LocalDateTime;
-import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author rafap
+ * @author thiag
  */
 public class ListarMedico extends javax.swing.JFrame {
 
@@ -114,7 +108,7 @@ public class ListarMedico extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(373, 373, 373)
+                        .addGap(370, 370, 370)
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()

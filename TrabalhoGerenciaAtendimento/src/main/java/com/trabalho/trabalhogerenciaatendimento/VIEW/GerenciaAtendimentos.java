@@ -110,10 +110,10 @@ public class GerenciaAtendimentos extends javax.swing.JFrame {
 
     private void btnGerarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarSenhaActionPerformed
 
-    GerarSenha gerar = new GerarSenha();
-    gerar.setVisible(rootPaneCheckingEnabled);
-    this.dispose();
-        
+        GerarSenha gerar = new GerarSenha();
+        gerar.setVisible(rootPaneCheckingEnabled);
+        this.dispose();
+
     }//GEN-LAST:event_btnGerarSenhaActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -128,14 +128,11 @@ public class GerenciaAtendimentos extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        
+
         ListarMedico lm = new ListarMedico();
-        
-        this.dispose();
-        
         lm.setVisible(true);
-        
-        
+        this.dispose();
+
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**

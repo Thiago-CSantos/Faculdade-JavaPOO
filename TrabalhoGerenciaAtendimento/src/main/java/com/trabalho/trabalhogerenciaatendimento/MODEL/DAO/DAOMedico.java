@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAOMedico {
+
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
-    private static final String PASS = "3443";
+    private static final String PASS = "123456";
     private Connection conexao = null;
     private List<Medico> medicoList = new ArrayList<>();
 
@@ -24,7 +25,7 @@ public class DAOMedico {
     protected void desconectar() throws SQLException {
         conexao.close();
     }
-    
+
     public List<Medico> listarMedicoByArea(String especialidade) {
         try {
             conectar();
@@ -97,9 +98,8 @@ public class DAOMedico {
             com.setString(7, medico.getEspecialidade().toString());
 
             com.executeUpdate();
-            desconectar();
-
             conexao.commit();
+            desconectar();
 
         } catch (SQLException e) {
             e.printStackTrace();

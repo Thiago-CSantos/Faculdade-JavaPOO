@@ -15,7 +15,7 @@ public class DAOResponsavel {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
-    private static final String PASS = "123456";
+    private static final String PASS = "1234";
     private Connection conexao = null;
     private List<Responsavel> responsavelList = new ArrayList<>();
 
@@ -54,22 +54,30 @@ public class DAOResponsavel {
         return null;
     }
 
-    public void cadastrarResponsavel(Responsavel responsavel) {
+    public void cadastrarResponsavel(Responsavel responsavel) throws SQLException {
         try {
             conectar();
-            String sql = "INSERT INTO Responsavel (nome, cpf, es_idDependente) VALUES (?, ?, ?)";
-            PreparedStatement stmt = conexao.prepareStatement(sql);
+            try {
+                conexao.setAutoCommit(false);
+                String sql = "INSERT INTO Responsavel (nome, cpf, es_idDependente) VALUES (?, ?, ?)";
+                PreparedStatement stmt = conexao.prepareStatement(sql);
 
-            stmt.setString(1, responsavel.getNome());
-            stmt.setString(2, responsavel.getCpf());
-            stmt.setInt(3, responsavel.getIdDependente());
+                stmt.setString(1, responsavel.getNome());
+                stmt.setString(2, responsavel.getCpf());
+                stmt.setInt(3, responsavel.getIdDependente());
 
-            stmt.executeUpdate();
-            desconectar();
+                stmt.executeUpdate();
+                conexao.commit();
 
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Erro ao cadastrar paciente: " + e.getMessage());
+            } finally {
+                conexao.setAutoCommit(true);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Erro ao cadastrar paciente: " + e.getMessage());
+
         }
     }
 
@@ -114,9 +122,9 @@ public class DAOResponsavel {
         }
     }
 
-    public Responsavel getResponsavel(int idPaciente){;
+    public Responsavel getResponsavel(int idPaciente) {;
         try {
-             conectar();
+            conectar();
             String sql = "SELECT nome, cpf FROM Responsavel where es_idDependente = " + idPaciente;
 
             PreparedStatement com = conexao.prepareStatement(sql);
@@ -124,7 +132,7 @@ public class DAOResponsavel {
             ResultSet result = com.executeQuery();
             Responsavel responsavel = null;
             while (result.next()) {
-                responsavel = new Responsavel(result.getString(1),result.getString(2));
+                responsavel = new Responsavel(result.getString(1), result.getString(2));
             }
             System.out.println("Responsavel: " + responsavel);
             return responsavel;

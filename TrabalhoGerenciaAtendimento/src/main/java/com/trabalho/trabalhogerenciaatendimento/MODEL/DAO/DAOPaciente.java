@@ -6,12 +6,13 @@ import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class DAOPaciente {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
-    private static final String PASS = "123456";
+    private static final String PASS = "1234";
     private Connection conexao = null;
     private List<Paciente> pacienteList = null;
 
@@ -54,33 +55,39 @@ public class DAOPaciente {
         return null;
     }
 
-    public void cadastrarPaciente(Paciente paciente) {
+    public void cadastrarPaciente(Paciente paciente) throws SQLException {
         try {
             conectar();
-            conexao.setAutoCommit(false);
+            try {                
+                conexao.setAutoCommit(false);
 
-            String sql = "INSERT INTO Paciente (nome, rg, sexo, dataNascimento) VALUES (?, ?, ?, ?)";
-            PreparedStatement com = conexao.prepareStatement(sql);
+                String sql = "INSERT INTO Paciente (nome, rg, sexo, dataNascimento) VALUES (?, ?, ?, ?)";
+                PreparedStatement com = conexao.prepareStatement(sql);
 
-            com.setString(1, paciente.getNome());
-            com.setString(2, paciente.getRg());
-            com.setString(3, paciente.getSexo().toString());
-            com.setDate(4, Date.valueOf(paciente.getDataNascimento()));
+                com.setString(1, paciente.getNome());
+                com.setString(2, paciente.getRg());
+                com.setString(3, paciente.getSexo().toString());
+                com.setDate(4, Date.valueOf(paciente.getDataNascimento()));
 
-            com.executeUpdate();
-            conexao.commit();
-            desconectar();
+                com.executeUpdate();
+                conexao.commit();
 
-            System.out.println("Paciente cadastrado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Paciente cadastrado com sucesso!");
 
+            } catch (SQLException e) {
+                e.printStackTrace();
+                try {
+                    conexao.rollback();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                System.out.println("Erro ao cadastrar paciente: " + e.getMessage());
+            } finally {
+                conexao.setAutoCommit(true);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            try {
-                conexao.rollback();
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-            System.out.println("Erro ao cadastrar paciente: " + e.getMessage());
         }
     }
 

@@ -7,9 +7,12 @@ import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Sexo;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Senha;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -177,8 +180,12 @@ public class DiagnosticoMedico extends javax.swing.JFrame {
             medico = " Nome: " + nome + " CRM: " + CRM + "\n Tratamento: " + tratamento + "\n Diagnostico: " + diagnostico;
             JOptionPane.showMessageDialog(rootPane, medico, "Diagnostico", JOptionPane.INFORMATION_MESSAGE);
             
-            // insert
-            controllerDiag.InsertDiagnostico(lblSenha.getText(),CRM,LocalDateTime.now(),diagnostico,tratamento);
+            try {
+                // insert
+                controllerDiag.InsertDiagnostico(lblSenha.getText(),CRM,LocalDateTime.now(),diagnostico,tratamento);
+            } catch (SQLException ex) {
+                Logger.getLogger(DiagnosticoMedico.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
         else{

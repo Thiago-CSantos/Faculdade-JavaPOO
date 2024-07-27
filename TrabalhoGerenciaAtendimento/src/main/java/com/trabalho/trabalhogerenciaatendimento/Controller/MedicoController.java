@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Medico;
+import java.sql.SQLException;
 
 public class MedicoController {
 
@@ -18,7 +19,7 @@ public class MedicoController {
         dao = new DAOMedico();
     }
 
-    public void cadastrarMedico(Medico medico) {
+    public void cadastrarMedico(Medico medico) throws SQLException {
         dao.cadastrarMedico(medico);
     }
 

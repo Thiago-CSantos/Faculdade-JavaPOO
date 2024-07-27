@@ -8,6 +8,9 @@ import com.trabalho.trabalhogerenciaatendimento.Controller.MedicoController;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Enum.Especialidade;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Medico;
 import java.io.File;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CadastrarMedico extends javax.swing.JFrame {
 
@@ -170,7 +173,11 @@ public class CadastrarMedico extends javax.swing.JFrame {
         String filePath = fileChooser.getSelectedFile().getAbsolutePath();
 
         Medico medico = new Medico(crm, nome, rg, cpf, dataNascimento, filePath, especialidade);
-        controller.cadastrarMedico(medico);
+        try {
+            controller.cadastrarMedico(medico);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarMedico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**

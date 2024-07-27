@@ -4,6 +4,9 @@ package com.trabalho.trabalhogerenciaatendimento.VIEW;
 import com.trabalho.trabalhogerenciaatendimento.Controller.ResponsavelController;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Responsavel;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -120,7 +123,11 @@ public class CadastrarResponsavel extends javax.swing.JFrame {
         Paciente paciente = controller.getPaciente(rgPaciente);
         Responsavel responsavel = new Responsavel(nome, cpf, paciente.getIdPacientePaciente());
         
-        controller.cadastrarResponsavel(responsavel);
+        try {
+            controller.cadastrarResponsavel(responsavel);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarResponsavel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }//GEN-LAST:event_jButton1ActionPerformed

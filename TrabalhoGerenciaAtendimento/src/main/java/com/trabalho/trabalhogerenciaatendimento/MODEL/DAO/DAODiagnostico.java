@@ -19,7 +19,7 @@ public class DAODiagnostico {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/GerenciaAtendimento";
     private static final String USER = "root";
-    private static final String PASS = "123456";
+    private static final String PASS = "1234";
     private Connection conexao = null;
     private List<Paciente> pacienteList = new ArrayList<>();
 
@@ -35,31 +35,39 @@ public class DAODiagnostico {
     }
 
     public void InsertDiagnostico(String es_idSenha, String es_CRMmedico,
-            LocalDateTime data_hora, String diagnostico, String tratamento) {
+            LocalDateTime data_hora, String diagnostico, String tratamento) throws SQLException {
         try {
             conectar();
-            String sql = "INSERT INTO Diagnostico (es_idSenha, es_CRMmedico, data_hora, diagnostico,tratamento )"
-                    + " VALUES (?, ?, ?, ?,?)";
-            PreparedStatement com = conexao.prepareStatement(sql);
+            try {                
+                conexao.setAutoCommit(false);
 
-            com.setString(1, es_idSenha);
-            com.setString(2, es_CRMmedico);
-            com.setTimestamp(3, Timestamp.valueOf(data_hora));
-            com.setString(4, diagnostico);
-            com.setString(5, tratamento);
+                String sql = "INSERT INTO Diagnostico (es_idSenha, es_CRMmedico, data_hora, diagnostico,tratamento )"
+                        + " VALUES (?, ?, ?, ?,?)";
+                PreparedStatement com = conexao.prepareStatement(sql);
 
-            com.executeUpdate();
+                com.setString(1, es_idSenha);
+                com.setString(2, es_CRMmedico);
+                com.setTimestamp(3, Timestamp.valueOf(data_hora));
+                com.setString(4, diagnostico);
+                com.setString(5, tratamento);
 
-            conexao.commit();
-            desconectar();
-            com.close();
+                com.executeUpdate();
+
+                conexao.commit();
+                com.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                try {
+                    conexao.rollback();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DAODiagnostico.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } finally {
+                conexao.setAutoCommit(true);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            try {
-                conexao.rollback();
-            } catch (SQLException ex) {
-                Logger.getLogger(DAODiagnostico.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
         }
     }
 

@@ -3,6 +3,7 @@ package com.trabalho.trabalhogerenciaatendimento.Controller;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.DAO.DAOSenha;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Paciente;
 import com.trabalho.trabalhogerenciaatendimento.MODEL.Senha;
+import java.sql.SQLException;
 
 public class SenhaController {
 
@@ -14,7 +15,7 @@ public class SenhaController {
         }
     }
 
-    public void gerarSenha(Senha senha) {
+    public void gerarSenha(Senha senha) throws SQLException {
         dao.gerarSenha(senha);
     }
     
